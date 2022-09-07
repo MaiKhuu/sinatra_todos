@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Todo App</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Sans">
+    <link rel="stylesheet" href="/stylesheets/whitespace-reset.css">
+    <link rel="stylesheet" href="/stylesheets/application.css">
+    <script src="/javascripts/jquery-3.6.1.js"></script>
+    <script src="/javascripts/application.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Todo Tracker</h1>
+      <div class="actions">
+        <%== yield_content :header_links %>
+      </div>
+    </header>
+
+    <% if message? %>
+      <p class="flash <%= message_class %>"> <%= message_text %> </p>
+      <% clear_message(message_class) %>
+    <% end %>
+
+    <main>
+      <%== yield %>
+    </main>
+  </body>
+</html>

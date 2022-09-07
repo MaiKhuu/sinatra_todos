@@ -1,0 +1,67 @@
+SESSION HASH is the main hash
+  - session[:all_lists] is an array of all the list arrays
+  - session[:error] and session[:success] for flash messages
+
+SESSION[:ALL_LISTS] is [LIST1, LIST2, LIST3, etc]
+where each list is an array
+
+LIST array is an individual list
+  - [:id] is the list_id identifier
+  - [:name] is the list name
+  - [:completed] if the list is completed
+  - [:todos] is the todo hash of the array
+
+SESSION[LIST_ID][TODO_ID] is a specific todo hash
+  - [:id] is the todo_id identifier
+  - [:name] is the actual todo name
+  - [:completed] if the list is completed
+
+================================================
+
+VIEW TEMPLATES:
+  - ALL_LISTS shows all existing lists.
+    Need: @all_lists
+        get   "/all-lists"
+
+  - NEW_LIST is the form for making a new list, user enters list name
+    Need:
+        get   "/all-lists/new"
+
+  - SINGLE_LIST is the page showing 1 list and its todos
+    Need: @current_list
+        get   "/all-lists/:list_id"
+
+  - EDIT_LIST is the page to change a list's name
+    Need: @current_list
+        get  "/all-lists/:list_id/edit"
+
+
+================================================
+
+VARIABLES:
+  - @all_lists
+  - @current_list
+
+================================================
+
+METHODS:
+  - numeral_id_for(item, leading_text) ==> return numeral id from list_id
+  - next_element_id(items, leading_text) ==> return next list_id or todo_id in line
+  - item_by_id(array, search_query) ==> return the item that item[:id] matches query
+  - check_list_name_for_error(name) ==> set session[:error] if there is an error with list name
+  - check_todo_name_for_error(name) ==> set session[:error] if there is an error with todo name
+  - mark_session_sucessful(message) / mark_session_failed(message)
+  - mark_item_completed(item) / mark_item_incompleted(item) ==> check list or todo as completed
+  - boolean(value) ==> change string "true"/"false" to boolean
+  - all_todos_completed(list) ==> if a list has all todos completed
+
+
+HELPER METHODS:
+  - li_class_for(item) ==> return class "complete" if completed
+  - total_todos_count(list)
+  - completed_todos_count(list)
+  - clear_message(type) ==> clear success or error message
+  - message? ==> is there a message to be displayed?
+  - message_class
+  - message_text
+  - sort_by_completion_status(list) ==> return a result array with non-completes before completes

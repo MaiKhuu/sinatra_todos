@@ -1,0 +1,27 @@
+<section id="todos">
+  <header>
+    <h2>Editing <%= @current_list[:name] %></h2>
+    <ul>
+      <li>
+        <form action="/all-lists/<%= @current_list[:id] %>/delete" method="post" class="delete">
+          <button type="submit" class="delete">Delete List</button>
+        </form>
+      </li>
+    </ul>
+  </header>
+</section>
+
+<form action="/all-lists/<%= @current_list[:id] %>/edit" method="post">
+  <dl>
+    <dt>
+      <label for="new_list_name" class=>Enter a new name for the current list:</label>
+    </dt>
+    <dd>
+      <input name="new_list_name" type="text" placeholder="New List Name" value="<%= params[:new_list_name] %>">
+    </dd>
+  </dl>
+  <fieldset class="action">
+    <input type="submit" value="Save">
+    <a href="/all-lists/<%= @current_list[:id] %>">Cancel</a>
+  </fieldset>
+</form>

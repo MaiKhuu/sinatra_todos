@@ -1,0 +1,15 @@
+<form method="post" action="/all-lists/new">
+  <dl>
+    <dt>
+      <label for="new_list_name">Please enter a new list name:</label>
+    </dt>
+    <dd>
+      <input name="new_list_name" type="text" value="<%= params[:new_list_name] %>" placeholder="New List Name">
+    </dd>
+  </dl>
+  <fieldset class="action">
+    <input type="submit" value="Save">
+    <a href="/all-lists">Cancel</a>
+  </fieldset>
+</form>
+
